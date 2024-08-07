@@ -1,0 +1,705 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+int main();
+void addstudentdetail(), searchstudent(), searchstudentbyrollno(), searchstudentbyname(), addteacherdetail(), showalldetail(), getteacherdata(), showteacherdetails(), searchteacher(), searchteacherbyname(), searchteacherbyid(), stud(), teach(), Exit(), registration(), menu2();
+void login();
+
+class User{
+private:
+string username, password;
+public:
+void setusername(string u){
+    username = u;
+}
+void setpassword(string p){
+    password = p;
+}
+string getusername(){
+    return username;
+}
+string getpassword(){
+    return password;
+}
+
+};
+
+
+class Manager: public User{
+
+    private:
+    string ruserId, rpassword;
+    public:
+    	
+//    	void registration();
+//    	void login();
+void registeration(){
+         string ruserId, rpassword, rid, rpass, remail, rmobile, rname;
+    cout<<"___________________________________________\n";
+    cout<<"              REGISTRATION                 \n";
+    cout<<"___________________________________________\n";
+    cout<<"\n";
+    cout<<"Enter Name     : \n";
+    cin>>rname;
+    cout<<"Enter UserName  : \n";
+    cin>>ruserId;
+    cout<<"Enter Email     : \n";
+    cin>>remail;
+    cout<<"Enter Mobile NO.:\n";
+    cin>>rmobile;
+    cout<<"Enter Password  : \n";
+    cin>>rpassword;
+         ofstream rfile("record.txt");
+        rfile<<rname<<" "<<ruserId<<" "<<remail<<" "<<rmobile<<" "<<rpassword;
+    cout<<"\n";
+    
+    rfile.close();
+   
+    cout<<"REGISTRATION SUCESSFULL\n";
+      main();
+    }
+
+ 
+    
+};
+
+
+
+
+
+class cDetails{
+	private:string name,address, contactno;
+	 
+    public:string age, gender;
+	void setname(string n){
+		name=n;
+	}
+	void setage(string a){
+		a=age;
+	}
+	void setgender(string g){
+		g=gender;
+	}
+	void setcontactno(string cn){
+		contactno=cn;
+	}
+	void setaddress(string ad){
+		address=ad;
+	}
+	
+		string getname(){
+			return name;
+	}
+	string getage(){
+		return age;
+	}
+	string getgender(){
+		return gender;
+	}
+	string getcontactno(){
+		return contactno;
+	}
+	string getaddress(){
+		return address;
+	}
+};
+
+class Student: public cDetails{
+   
+ private:
+    string email, fees;
+     public:
+
+    string n,add, num, rollno;
+    string  course, branch, session, userId ;
+    void getdata(){
+    cout<<"ENTER STUDENT DETAILS\n";
+        cout<<"Roll No.     : \n";
+        cin>>rollno;
+        cout<<"Name         : \n";
+        cin>>n;
+        setname(n);
+        cout<<"Age          : \n";
+        cin>>age;
+        setage(age);
+        cout<<"Gender       : \n";
+        cin>>gender;
+        setgender(gender);
+        cout<<"Course       : \n";
+        cin>>course;
+        cout<<"branch       : \n";
+        cin>>branch;
+        cout<<"Session      : \n";
+        cin>>session;
+        cout<<"Contact No.  : \n";
+        cin>>num;
+        setcontactno(num);
+        cout<<"Email address: \n";
+        cin>>email;
+        cout<<"Fees         : \n";
+        cin>>fees;
+        cout<<"address		: \n";
+        cin>>add;
+        setaddress(add);
+        ofstream file2("student.txt");
+        file2<<rollno<<" "<<n<<" "<<age<<" "<<gender<<" "<<course<<" "<<branch<<" "<<session<<" "<<num<<" "<<email<<" "<<fees<<" "<<add;
+        file2.close();
+        system("cls");
+    }
+    
+ 
+  
+
+
+    void showdata(){
+        cout<<"STUDENT DETAILS \n";
+//       getage();
+//       getname();
+//       getgender();
+//       getaddress();
+         ifstream show("student.txt");
+         show>>rollno>>n>>age>>gender>>course>>branch>>session>>num>>email>>fees>>add;
+        cout<<"Roll No.     : "<<rollno<<"\n";
+        cout<<"Name         : "<<n<<"\n";
+        cout<<"Age          : "<<age<<"\n";
+        cout<<"Gender       : "<<gender<<"\n";
+        cout<<"Course       : "<<course<<"\n";
+        cout<<"branch       : "<<branch<<"\n";
+        cout<<"Session      : "<<session<<"\n";
+        cout<<"Contact No.  : "<<num<<"\n";
+        cout<<"Email address: "<<email<<"\n";
+        cout<<"Fees         : "<<fees<<"\n";
+        cout<<"Address      : "<<add<<"\n";
+       
+         show.close();
+    }
+
+};
+
+class Teacher:public cDetails{
+	public:
+	string name, age, gender, salary, add, teacherid, email,num;
+	 void getteacherdata(){
+    cout<<"ENTER TEACHER DETAILS\n";
+        cout<<"Teacher Id   : \n";
+        cin>>teacherid;
+        cout<<"Name         : \n";
+        cin>>name;
+        setname(name);
+        cout<<"Age          : \n";
+        cin>>age;
+        setage(age);
+        cout<<"Gender       : \n";
+        cin>>gender;
+        setgender(gender); 
+        cout<<"Contact No.  : \n";
+        cin>>num;
+        setcontactno(num);
+        cout<<"Email address: \n";
+        cin>>email;
+        cout<<"Salary        : \n";
+        cin>>salary;
+        cout<<"Address		: \n";
+        cin>>add;
+        setaddress(add);
+        ofstream Tf("Teacher.txt");
+         Tf<<" "<<teacherid<<" "<<name<<" "<<age<<" "<<gender<<" "<<num<<" "<<email<<" "<<salary<<" "<<add;
+         Tf.close();
+		}
+	
+	void showteacherdetails(){
+		string techerid, name, age, gender, contactno, email, salary, address;
+	
+	 cout<<"Teacher Details \n";
+        // getage();
+        // getname();
+        // getgender();
+        // getaddress();
+        ifstream Tf("Teacher.txt");
+         Tf>>teacherid>>name>>age>>gender>>contactno>>email>>salary>>address;
+        cout<<"Teacher Id   : "<<teacherid<<"\n";
+        cout<<"Name         : "<<name<<"\n";
+        cout<<"Age          : "<<age<<"\n";
+        cout<<"Gender       : "<<gender<<"\n";
+        cout<<"Contact No.  : "<<contactno<<"\n";
+        cout<<"Email        : "<<email<<"\n";
+        cout<<"Address      : "<<address<<"\n";
+        cout<<"Salary       : "<<salary<<"\n";
+         
+         Tf.close();
+         
+}
+};
+   
+   void login(){
+   
+    int count;
+    string userId, password, id, pass, name, email, mobile;
+       
+
+    cout<<"Please Enter the USERNAME and PASSWORD \n";
+    cout<<"USERNAME : \n";
+    cin>>id;
+    cout<<"PASSWORD : \n";
+    cin>>pass;
+system("cls");
+    ifstream input("record.txt");
+    input>>name>>userId>>email>>mobile>>password;
+    
+    if(id==userId && pass==password){
+          count=1;
+    }
+    else if(id!=userId){
+        cout<<"Your USERNAME is incorrecct"<<"\n";
+    }else{
+        cout<<"Your PASSWORD is incorrect"<<"\n"; 
+    }
+    
+  
+input.close();
+   
+if(count==1){
+	cout<<"_________________________________________________\n";
+    cout<<userId<<" "<<"\n YOUR LOGIN IS SUCCESSFUL \n";
+    cout<<"_________________________________________________\n";
+   menu2();
+
+    
+}else{
+	system("cls");
+        cout<<"LOGIN ERROR\n";
+        cout<<"YOU HAVE ENTERED WRONG USERNAME AND PASSWORD\n";
+        cout<<"\n";
+        login();
+    }
+	}
+
+void addstudentdetail(){
+   
+Student s;
+system("cls");
+    cout<<"Enter details of Student "<<"\n";
+    s.getdata();
+    stud();
+
+}
+
+void showalldetail(){ 
+
+   int g;
+   Student s;
+   s.showdata();
+   cout<<"Press 1 to go back to last menu\n";
+   cout<<"press 2 to Logout \n";
+   cin>>g;
+   switch(g){
+   	case 1:
+   		system("cls");
+   		stud();
+   		break;
+   		case 2:
+   			Exit();
+   			break;
+   			default:
+   				system("cls");
+   				cout<<"Enter a valid choice\n";
+   				break;
+   }
+}
+
+
+void searchstudent(){
+	cout<<"Press 1 To search by Roll no.\n";
+	cout<<"Press 2 To Search by Name\n";
+	cout<<"Press 3 to back to last menu\n";
+	int b;
+	cin>>b;
+	switch(b){
+		case 1:
+			searchstudentbyrollno();
+			break;
+			case 2:
+				searchstudentbyname();
+				break;
+				case 3:
+					stud();
+					break;
+					default: 
+					cout<<"Enter a valid choice\n";
+					break;
+	}
+}
+
+void searchstudentbyrollno(){
+	string rollno, name, age, gender, course, branch, session, contactno, email, fees, address; 
+	string r;
+	cout<<"Enter Roll no. : \n";
+	cin>>r;
+	  ifstream show("student.txt");
+         show>>rollno>>name>>age>>gender>>course>>branch>>session>>contactno>>email>>fees>>address;
+         
+	if (r==rollno){
+		cout<<"Name       : "<<name<<"\n ";
+		cout<<"Rollno     : "<<rollno<<"\n ";
+		cout<<"Age        : "<<age<<"\n ";
+		cout<<"Gender     : "<<gender<<"\n ";
+		cout<<"Course     : "<<course<<"\n ";
+		cout<<"Branch     : "<<branch<<" \n";
+		cout<<"Session    : "<<session<<" \n";
+		cout<<"Contact No : "<<contactno<<" \n";
+		cout<<"Email      : "<<email<<" \n";
+		cout<<"Fees       : "<<fees<<"\n";
+		cout<<"Address    : "<<address<<"\n";
+	}else{
+	system("cls");
+		cout<<"Rollno not found!!!\n";
+		searchstudentbyrollno();
+		
+	}
+	show.close();
+}
+
+void searchstudentbyname(){
+	string rollno, name, age, gender, course, branch, session, contactno, email, fees, address; 
+
+		string n;
+	cout<<"Enter Name : \n";
+	cin>>n;
+	  ifstream show("student.txt");
+         show>>rollno>>name>>age>>gender>>course>>branch>>session>>contactno>>email>>fees>>address;
+         
+	if (n==name){
+		system("cls");
+//		cout<<name<<" "<<rollno<<" "<<age<<" "<<gender<<" "<<course<<" "<<branch<<" "<<session<<" "<<contactno<<" "<<email<<" "<<fees<<" "<<address;
+		cout<<"Name       : "<<name<<"\n ";
+		cout<<"Rollno     : "<<rollno<<"\n ";
+		cout<<"Age        : "<<age<<"\n ";
+		cout<<"Gender     : "<<gender<<"\n ";
+		cout<<"Course     : "<<course<<"\n ";
+		cout<<"Branch     : "<<branch<<" \n";
+		cout<<"Session    : "<<session<<" \n";
+		cout<<"Contact No : "<<contactno<<" \n";
+		cout<<"Email      : "<<email<<" \n";
+		cout<<"Fees       : "<<fees<<"\n";
+		cout<<"Address    : "<<address<<"\n";
+	
+	}else{
+	system("cls");
+		cout<<"Name not found!!!\n";
+		searchstudentbyname();
+		
+	}
+	show.close();
+}
+
+
+
+
+void addteacherdetail(){
+	
+    
+Teacher t;
+
+    cout<<"Enter details of Teacher "<<"\n";
+    t.getteacherdata();
+    system("cls");
+    int l;
+    cout<<"\n";
+    cout<<"Details Added Successfuly\n";
+    cout<<" \n";
+    cout<<"Press 1 to go back to menu\n";
+    cout<<"Press 2 to Exit\n";
+    cin>>l;
+    switch(l){
+    	case 1:
+		system("cls");
+		 teach();
+    	break;
+    	case 2: 
+    	Exit();
+    	break;
+    	default:
+    		system("cls");
+    		cout<<"Enter valid choice \n";
+    		t.getteacherdata();
+	}
+    
+}
+
+void showteacherdetails(){
+	int f;
+	  Teacher t;
+   t.showteacherdetails();
+   cout<<"Press 1 to go back to last menu\n";
+   cout<<"press 2 to exit\n";
+  cin>>f;
+   switch(f){
+   	case 1:
+   		system("cls");
+   		teach();
+   		break;
+   		case 2:
+   			Exit();
+   			break;
+   			default:
+   				system("cls");
+   				cout<<"Enter a valid choice\n";
+   				t.showteacherdetails();
+   				break;
+   }
+}
+
+
+void searchteacher(){
+	int s;
+	cout<<"Search Teacher By  : \n";
+	cout<<"Press 1 To Search by ID\n";
+	cout<<"Press 2 To Search by Name\n";
+	cout<<"Press 3 To go back to menu\n";
+	cout<<"Press 4 to Exit or Logout\n";
+	cin>>s;
+	
+	switch(s){
+		case 1:
+			system("cls");
+			searchteacherbyid();
+			break;
+			case 2:
+				system("cls");
+				searchteacherbyname();
+				
+				break;
+				case 3:  
+				system("cls");
+				teach();
+				break;
+				case 4: 
+				Exit();
+				break;
+				default:
+					system("cls");
+					cout<<"Enter a valid choice!!\n";
+					searchteacher();
+					break;
+	}
+}
+void searchteacherbyid(){
+string i;
+string teacherid, name, gender, contactno, email, salary, address, age;
+	cout<<"Enter ID : \n";
+	cin>>i;
+	
+	ifstream Tf("Teacher.txt");
+	
+         Tf>>teacherid>>name>>age>>gender>>contactno>>email>>salary>>address;
+        if(teacherid==i){
+		
+		cout<<"Teacher ID   : "<<teacherid<<"\n";
+        cout<<"Name         : "<<name<<"\n";
+        cout<<"Age          : "<<age<<"\n";
+        cout<<"Gender       : "<<gender<<"\n";
+        cout<<"Contact No.  : "<<contactno<<"\n";
+        cout<<"Email        : "<<email<<"\n";
+        cout<<"Address      : "<<address<<"\n";
+        cout<<"Salary       : "<<salary<<"\n";
+         
+         Tf.close();
+     }else {
+     	system("cls");
+     	cout<<"NO Data Found!!!\n";
+     	searchteacherbyid();
+	 }
+}
+void searchteacherbyname(){
+	string n;
+	string teacherid, name, gender, contactno, email, salary, address, age;
+	cout<<"Enter name : \n";
+	cin>>n;
+	
+	ifstream Tf("Teacher.txt");
+         Tf>>teacherid>>name>>age>>gender>>contactno>>email>>salary>>address;
+        if(name==n){
+		
+		cout<<"Teacher Id   : "<<teacherid<<"\n";
+        cout<<"Name         : "<<name<<"\n";
+        cout<<"Age          : "<<age<<"\n";
+        cout<<"Gender       : "<<gender<<"\n";
+        cout<<"Contact No.  : "<<contactno<<"\n";
+        cout<<"Email        : "<<email<<"\n";
+        cout<<"Address      : "<<address<<"\n";
+        cout<<"Salary       : "<<salary<<"\n";
+         
+         Tf.close();
+     }else {
+     	system("cls");
+     	cout<<"NO Data Found!!!\n";
+     	searchteacherbyname();
+	 }
+}
+
+void stud(){
+	cout<<"Student";
+	Student mystud;
+	
+	int a;
+	cout<<"Press 1 To Add Student\n";
+	cout<<"Press 2 To view students detail\n";
+	cout<<"Press 3 To Search Student\n";
+	cout<<"Press 4 To go back to menu\n";
+	cout<<"Press 5 To Exit\n";
+	cin>>a;
+	switch(a){
+		case 1:
+			system("cls");
+		addstudentdetail();
+		break;
+		case 2 :
+			system("cls");
+			showalldetail();
+			break;
+		case 3:
+			system("cls");
+			searchstudent();
+				break;
+		case 4:
+			system("cls");
+			menu2();
+					break;
+		case 5:
+						Exit();
+						break;
+						default:
+							system("cls");
+							cout<<"Enter a valid choice\n";
+							stud();
+							break;
+	}
+	
+}
+
+void teach(){
+	cout<<"Teacher";
+	Teacher mt;
+	int j;
+	cout<<"Press 1 To Add Teacher Data\n";
+	cout<<"Press 2 To View Teacher Data\n";
+	cout<<"Press 3 To Search Teacher \n";
+	cout<<"Press 4 To Go Back to last menu\n";
+	cout<<"Press 5 To Logout\n";
+	cin>>j;
+	switch(j){
+		case 1:
+			mt.getteacherdata();
+			
+			break;
+			case 2:
+				mt.showteacherdetails();
+				
+				
+				
+				break;
+				case 3:
+					system("cls");
+					searchteacher();
+					break;
+				case 4:
+					system("cls");
+					menu2();
+					break;
+				case 5:
+					Exit();
+					break;
+				default:
+					system("cls");
+					teach();
+					break;
+	}
+}
+
+void menu2(){
+	 int h;
+    cout<<"Press 1 for student\n";
+    cout<<"Press 2 for Teacher\n";
+    cout<<"Press 3 To go back to login page\n";
+    cout<<"Press 4 To exit\n";
+    cin>>h;
+    switch(h){
+    	case 1:
+    	system("cls");
+    		stud();
+    		break;
+    	case 2:
+    	system("cls");
+    		teach();
+    		
+    		break;
+    	case 3:
+    		system("cls");
+    			login();
+    		break;
+    	case 4: 
+    	     Exit();
+    	     break;
+    			
+    	default :
+    		system("cls");
+    		cout<<"Please Enter correct choice";
+    		menu2();
+    		break;
+	}
+}
+
+void Exit(){
+	system("cls");
+    
+	cout<<"\n";
+	cout<<"Logout Successful   \n";
+	cout<<"\n";
+	cout<<"THANKS YOU!!!!\n";
+    exit(0);
+}
+
+int main(){
+ 
+  Manager mobj;
+  
+    int c;
+    system("cls");
+    cout<<"\t___________________________________________________________________\n";
+    cout<<"\t                     WELCOME TO LOGIN PAGE OF                      \n";
+    cout<<"\t               STUDENT & TEACHER  MANAGEMENT SYSTEM                \n";
+    cout<<"\t___________________________________________________________________\n";
+    cout<<"\t|PRESS 1 TO LOGIN         |\n";
+    cout<<"\t|PRESS 2 TO REGISTER      |\n";
+    cout<<"\t|PRESS 3 TO EXIT          |\n";
+    cout<<"\tPLEASE ENTER YOUR CHOICE  : \n";
+    cin>>c;
+    cout<<"\n";
+    
+system("cls");
+
+    switch(c){
+        case 1:
+//      mobj.login();
+        login();
+        break;
+        case 2:
+//    mobj.registration();
+       mobj.registeration();
+        break;
+        case 3:
+        	system("cls");
+            cout<<" Thank You\n";
+            exit(0);
+            break;
+         default :
+            
+            cout<<"Please select from the above options\n";
+            main();
+            break;
+    }
+    return 0;
+
+}
+
